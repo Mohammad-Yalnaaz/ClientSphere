@@ -2,7 +2,7 @@
 # ClientSphere — Enterprise Client & Project Management Platform
 
 **Document Version:** 1.0
-**Document Status: Complete (Chapters 1–6)
+**Document Status:** Complete (Chapters 1–6)
 **Prepared For:** ClientSphere Product & Engineering Team
 **Document Type:** Software Requirements Specification
 
