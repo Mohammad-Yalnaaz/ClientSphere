@@ -51,8 +51,8 @@ const authRouter = require('../modules/auth/auth.routes');
 router.use('/auth', authRouter);
 
 // MODULE 3 – Organizations
-// const organizationsRouter = require('../modules/organizations/organizations.routes');
-// router.use('/organizations', organizationsRouter);
+const organizationsRouter = require('../modules/organizations/organizations.routes');
+router.use('/organizations', organizationsRouter);
 
 // MODULE 4 – Users
 // const usersRouter = require('../modules/users/users.routes');
