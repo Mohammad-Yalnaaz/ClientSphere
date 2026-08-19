@@ -55,8 +55,8 @@ const organizationsRouter = require('../modules/organizations/organizations.rout
 router.use('/organizations', organizationsRouter);
 
 // MODULE 4 – Users
-// const usersRouter = require('../modules/users/users.routes');
-// router.use('/users', usersRouter);
+const usersRouter = require('../modules/users/users.routes');
+router.use('/users', usersRouter);
 
 // MODULE 5 – Clients
 // const clientsRouter = require('../modules/clients/clients.routes');
