@@ -11,44 +11,47 @@
  * resources MUST include this field as a mandatory filter, ensuring
  * that no operation can reach data belonging to another Organization.
  *
- * Implementation: Module 2 (Authentication).
- * Declared in Module 1 so the correct interface is available
- * for import throughout the application before Module 2 ships.
- *
  * Design decisions:
- * - Attaching organizationId to req (rather than re-reading from
- *   req.user.organizationId at each repository call) provides a
- *   single, trusted, request-scoped value. All modules read from
- *   req.organizationId — never from req.user.organizationId directly —
- *   so that scope enforcement is consistent regardless of how the
- *   User document structure evolves.
- * - A missing organizationId is treated as a 403 Forbidden rather
- *   than a 500 error, because a User without an organisation is a
- *   known-invalid state in this system (every User belongs to exactly
- *   one Organisation per SRS Ch.3).
+ * - req.organizationId is a string (not an ObjectId) so that it can
+ *   be safely compared and embedded in queries without extra .toString()
+ *   calls throughout the codebase.
+ * - This middleware must always run after authenticate middleware.
+ * - A missing organizationId on req.user is treated as 403 Forbidden —
+ *   an authenticated user without an organisation is an invalid system
+ *   state per SRS Ch.3.
  */
 
 const AppError = require('../utils/appError.util');
 const HTTP_STATUS = require('../constants/httpStatusCodes.constants');
-const asyncHandler = require('../utils/asyncHandler.util');
 
 /**
  * Organization scope middleware.
- * Implemented in Module 2.
  */
-const organizationScope = asyncHandler(async (req, res, next) => {
-  // ── Module 2 implementation placeholder ─────────────────────────────
-  // This function will:
-  // 1. Read req.user.organizationId (set by authenticate middleware).
-  // 2. Attach req.organizationId = req.user.organizationId.toString().
-  // 3. Call next() on success; next(AppError 403) if value is missing.
-  // ────────────────────────────────────────────────────────────────────
-  next(
-    new AppError(
-      'Organization scope middleware not yet implemented. (Module 2)',
-      HTTP_STATUS.NOT_IMPLEMENTED
-    )
-  );
-});
+const organizationScope = (req, _res, next) => {
+  // Defensive check: authenticate middleware must have run first.
+  if (!req.user) {
+    return next(
+      new AppError(
+        'Authentication required. organizationScope must be used after authenticate.',
+        HTTP_STATUS.UNAUTHORIZED
+      )
+    );
+  }
+
+  const orgId = req.user.organizationId;
+  if (!orgId) {
+    return next(
+      new AppError(
+        'Your account is not associated with an organization.',
+        HTTP_STATUS.FORBIDDEN
+      )
+    );
+  }
+
+  // Attach as a string for convenient use in query filters.
+  req.organizationId = orgId.toString();
+
+  next();
+};
 
 module.exports = organizationScope;

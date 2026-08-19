@@ -7,14 +7,12 @@
  *
  * Returns an Express middleware that checks whether the authenticated
  * User (attached to req.user by authenticate.middleware.js) holds one
- * of the permitted roles. If not, forwards a 403 AppError.
+ * of the permitted roles. If not, forwards a 403 Forbidden AppError.
  *
  * This middleware MUST always be used AFTER authenticate middleware
  * in the route chain, because it depends on req.user being set.
  *
- * Implementation: Module 2 (Authentication).
- *
- * Usage (once Module 2 is implemented):
+ * Usage:
  *   router.post(
  *     '/projects',
  *     authenticate,
@@ -30,19 +28,28 @@ const AppError = require('../utils/appError.util');
 const HTTP_STATUS = require('../constants/httpStatusCodes.constants');
 
 function authorizeRole(...roles) {
-  return (req, res, next) => {
-    // ── Module 2 implementation placeholder ────────────────────────────
-    // This function will:
-    // 1. Confirm req.user exists (authenticate must have run first).
-    // 2. Check req.user.role is in the `roles` array.
-    // 3. Call next() on success; next(AppError 403) on failure.
-    // ──────────────────────────────────────────────────────────────────
-    next(
-      new AppError(
-        'Role authorization middleware not yet implemented. (Module 2)',
-        HTTP_STATUS.NOT_IMPLEMENTED
-      )
-    );
+  return (req, _res, next) => {
+    // Defensive check: authenticate middleware must have run first.
+    if (!req.user) {
+      return next(
+        new AppError(
+          'Authentication required. authorizeRole must be used after authenticate.',
+          HTTP_STATUS.UNAUTHORIZED
+        )
+      );
+    }
+
+    // Check whether the user's role is in the permitted set.
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError(
+          `You do not have permission to perform this action. Required role: ${roles.join(' or ')}.`,
+          HTTP_STATUS.FORBIDDEN
+        )
+      );
+    }
+
+    next();
   };
 }
 

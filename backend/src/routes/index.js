@@ -47,8 +47,8 @@ router.get('/health', (req, res) => {
 // Do NOT uncomment a module until its router file is implemented.
 
 // MODULE 2 – Authentication
-// const authRouter = require('../modules/auth/auth.routes');
-// router.use('/auth', authRouter);
+const authRouter = require('../modules/auth/auth.routes');
+router.use('/auth', authRouter);
 
 // MODULE 3 – Organizations
 // const organizationsRouter = require('../modules/organizations/organizations.routes');
