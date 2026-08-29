@@ -63,8 +63,8 @@ const clientsRouter = require('../modules/clients/clients.routes');
 router.use('/clients', clientsRouter);
 
 // MODULE 6 – Projects
-// const projectsRouter = require('../modules/projects/projects.routes');
-// router.use('/projects', projectsRouter);
+const projectsRouter = require('../modules/projects/projects.routes');
+router.use('/projects', projectsRouter);
 
 // MODULE 7 – Tasks
 // const tasksRouter = require('../modules/tasks/tasks.routes');
