@@ -66,9 +66,9 @@ router.use('/clients', clientsRouter);
 const projectsRouter = require('../modules/projects/projects.routes');
 router.use('/projects', projectsRouter);
 
-// MODULE 7 – Tasks
-// const tasksRouter = require('../modules/tasks/tasks.routes');
-// router.use('/tasks', tasksRouter);
+// MODULE 7 – Tasks (nested under projects)
+const tasksRouter = require('../modules/tasks/tasks.routes');
+router.use('/projects/:projectId/tasks', tasksRouter);
 
 // MODULE 8 – Comments
 // const commentsRouter = require('../modules/comments/comments.routes');
