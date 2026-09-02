@@ -71,8 +71,8 @@ const tasksRouter = require('../modules/tasks/tasks.routes');
 router.use('/projects/:projectId/tasks', tasksRouter);
 
 // MODULE 8 – Comments
-// const commentsRouter = require('../modules/comments/comments.routes');
-// router.use('/comments', commentsRouter);
+const commentsRouter = require('../modules/comments/comments.routes');
+router.use('/comments', commentsRouter);
 
 // MODULE 9 – Files
 // const filesRouter = require('../modules/files/files.routes');
