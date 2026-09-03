@@ -79,8 +79,8 @@ const filesRouter = require('../modules/files/files.routes');
 router.use('/files', filesRouter);
 
 // MODULE 10 – Notifications
-// const notificationsRouter = require('../modules/notifications/notifications.routes');
-// router.use('/notifications', notificationsRouter);
+const notificationsRouter = require('../modules/notifications/notifications.routes');
+router.use('/notifications', notificationsRouter);
 
 // MODULE 11 – Dashboard & Analytics
 // const dashboardRouter = require('../modules/dashboard/dashboard.routes');
