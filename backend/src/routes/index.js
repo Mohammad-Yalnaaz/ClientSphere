@@ -95,7 +95,7 @@ router.use('/activity-logs', activityLogsRouter);
 // router.use('/search', searchRouter);
 
 // MODULE 14 – AI Services
-// const aiServicesRouter = require('../modules/aiServices/aiServices.routes');
-// router.use('/ai', aiServicesRouter);
+const aiServicesRouter = require('../modules/aiServices/aiServices.routes');
+router.use('/ai', aiServicesRouter);
 
 module.exports = router;
