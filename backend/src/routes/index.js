@@ -87,8 +87,8 @@ const dashboardRouter = require('../modules/dashboard/dashboard.routes');
 router.use('/dashboard', dashboardRouter);
 
 // MODULE 12 – Activity Logs
-// const activityLogsRouter = require('../modules/activityLogs/activityLogs.routes');
-// router.use('/activity-logs', activityLogsRouter);
+const activityLogsRouter = require('../modules/activityLogs/activityLogs.routes');
+router.use('/activity-logs', activityLogsRouter);
 
 // MODULE 13 – Search
 // const searchRouter = require('../modules/search/search.routes');
