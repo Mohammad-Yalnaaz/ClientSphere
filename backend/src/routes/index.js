@@ -83,8 +83,8 @@ const notificationsRouter = require('../modules/notifications/notifications.rout
 router.use('/notifications', notificationsRouter);
 
 // MODULE 11 – Dashboard & Analytics
-// const dashboardRouter = require('../modules/dashboard/dashboard.routes');
-// router.use('/dashboard', dashboardRouter);
+const dashboardRouter = require('../modules/dashboard/dashboard.routes');
+router.use('/dashboard', dashboardRouter);
 
 // MODULE 12 – Activity Logs
 // const activityLogsRouter = require('../modules/activityLogs/activityLogs.routes');
