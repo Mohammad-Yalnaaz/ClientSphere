@@ -123,6 +123,12 @@ async function bootstrap() {
       });
     });
 
+    // Step 4 — Initialize Socket.io real-time server
+    const { initSocketServer } = require('./config/socket.config');
+    const { registerSocketHandlers } = require('./sockets');
+    const io = initSocketServer(httpServer);
+    registerSocketHandlers(io);
+
     // Increase the keep-alive and header timeout beyond the default 5 s
     // to prevent premature connection drops under Render's load balancer.
     httpServer.keepAliveTimeout = 65_000;
