@@ -105,6 +105,10 @@ async function bootstrap() {
     // Step 1 — Connect to MongoDB
     await connectDatabase();
 
+    // Step 1b — Configure Cloudinary for file uploads
+    const { configureCloudinary } = require('./config/cloudinary.config');
+    configureCloudinary();
+
     // Step 2 — Build the Express application
     const app = createApp();
 

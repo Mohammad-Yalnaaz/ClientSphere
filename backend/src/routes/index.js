@@ -75,8 +75,8 @@ const commentsRouter = require('../modules/comments/comments.routes');
 router.use('/comments', commentsRouter);
 
 // MODULE 9 – Files
-// const filesRouter = require('../modules/files/files.routes');
-// router.use('/files', filesRouter);
+const filesRouter = require('../modules/files/files.routes');
+router.use('/files', filesRouter);
 
 // MODULE 10 – Notifications
 // const notificationsRouter = require('../modules/notifications/notifications.routes');
