@@ -91,8 +91,8 @@ const activityLogsRouter = require('../modules/activityLogs/activityLogs.routes'
 router.use('/activity-logs', activityLogsRouter);
 
 // MODULE 13 – Search
-// const searchRouter = require('../modules/search/search.routes');
-// router.use('/search', searchRouter);
+const searchRouter = require('../modules/search/search.routes');
+router.use('/search', searchRouter);
 
 // MODULE 14 – AI Services
 const aiServicesRouter = require('../modules/aiServices/aiServices.routes');
